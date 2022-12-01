@@ -10,4 +10,4 @@ Steps:
 1. Change `ConnectionString` in `appsettings.json`
 2. Build Docker image
 3. Deploy new App Service with Docker image on Azure
-4. Every ~15 minutes you will see trace warning in you App Insights
+4. Every ~15 minutes you will see trace warning in your App Insights
