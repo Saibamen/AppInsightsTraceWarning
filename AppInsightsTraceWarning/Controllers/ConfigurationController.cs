@@ -15,6 +15,7 @@ namespace AppInsightsTraceWarning.Controllers
             return Ok(new VersionModel
             {
                 Environment = environment,
+                Info = "Without Serilog (deleted all Serilog packages and code)",
             });
         }
     }
@@ -25,5 +26,6 @@ namespace AppInsightsTraceWarning.Controllers
         /// ASPNETCORE_ENVIRONMENT environment variable
         /// </summary>
         public string Environment { get; set; }
+        public string Info { get; set; }
     }
 }
