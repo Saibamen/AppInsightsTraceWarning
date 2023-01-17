@@ -1,5 +1,5 @@
-﻿using Microsoft.ApplicationInsights.Extensibility;
-using Microsoft.ApplicationInsights.Extensibility.Implementation;
+﻿using AppInsightsTraceWarning.Telemetry;
+using Microsoft.ApplicationInsights.Extensibility;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.ResponseCompression;
@@ -59,6 +59,7 @@ namespace AppInsightsTraceWarning
             };
 
             services.AddApplicationInsightsTelemetry(aiOptions);
+            services.AddApplicationInsightsTelemetryProcessor<ApiVersionFilter>();
 
             services.AddLogging(builder =>
             {
