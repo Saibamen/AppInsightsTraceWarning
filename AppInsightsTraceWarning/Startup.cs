@@ -1,6 +1,5 @@
-﻿using AppInsightsTraceWarning.Configuration;
+﻿using AppInsightsTraceWarning.Telemetry;
 using Microsoft.ApplicationInsights.Extensibility;
-using Microsoft.ApplicationInsights.Extensibility.Implementation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.ResponseCompression;
@@ -8,7 +7,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Serilog;
 using System;
 using System.Text;
 
@@ -61,18 +59,17 @@ namespace AppInsightsTraceWarning
             };
 
             services.AddApplicationInsightsTelemetry(aiOptions);
+            services.AddApplicationInsightsTelemetryProcessor<ApiVersionFilter>();
 
             services.AddLogging(builder =>
             {
                 builder.AddAzureWebAppDiagnostics();
-                builder.AddSerilog();
             });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostEnvironment env, TelemetryConfiguration telemetryConfiguration)
         {
-            InternalLoggerConfiguration.Configure(env, Configuration);
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
